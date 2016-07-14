@@ -1,5 +1,5 @@
 <?php
-require_once('./twilio-php/Services/Twilio.php');
+include 'vendor/autoload.php';
 require_once('./randos.php');
 require_once('./config.php');
 
@@ -16,7 +16,7 @@ $deviceId = $_GET['device'];
 $endpointId = $appName . ':' . $identity . ':' . $deviceId;
 
 // Create access token, which we will serialize and send to the client
-$token = new Services_Twilio_AccessToken(
+$token = new Twilio\AccessToken(
     $TWILIO_ACCOUNT_SID, 
     $TWILIO_API_KEY, 
     $TWILIO_API_SECRET, 
@@ -25,7 +25,7 @@ $token = new Services_Twilio_AccessToken(
 );
 
 // Create IP Messaging grant
-$syncGrant = new Services_Twilio_Auth_SyncGrant();
+$syncGrant = new Twilio\Auth\SyncGrant();
 $syncGrant->setServiceSid($TWILIO_SYNC_SERVICE_SID);
 $syncGrant->setEndpointId($endpointId);
 
