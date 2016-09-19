@@ -16,7 +16,7 @@ $deviceId = $_GET['device'];
 $endpointId = $appName . ':' . $identity . ':' . $deviceId;
 
 // Create access token, which we will serialize and send to the client
-$token = new Twilio\AccessToken(
+$token = new Twilio\Jwt\AccessToken(
     $TWILIO_ACCOUNT_SID, 
     $TWILIO_API_KEY, 
     $TWILIO_API_SECRET, 
@@ -25,7 +25,7 @@ $token = new Twilio\AccessToken(
 );
 
 // Create IP Messaging grant
-$syncGrant = new Twilio\Auth\SyncGrant();
+$syncGrant = new Twilio\Jwt\Grants\SyncGrant();
 $syncGrant->setServiceSid($TWILIO_SYNC_SERVICE_SID);
 $syncGrant->setEndpointId($endpointId);
 
